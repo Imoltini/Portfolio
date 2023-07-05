@@ -180,7 +180,7 @@ public class TooltipManager : MonoBehaviour
         float id = pNumber == 0 ? pTwocurrentID : currentID;
         if (item.id == id) return;
         //
-        var itemList = pIndex == 0 ? listOfNearbyItems : pTwoNearbyItems;
+        var itemList = pNumber == 0 ? listOfNearbyItems : pTwoNearbyItems;
         if (!itemList.ContainsKey(item.id)) itemList.Add(item.id, item);
         //
         tooltipController[pNumber].ShowTooltip(item);
