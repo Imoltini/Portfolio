@@ -52,12 +52,12 @@ public class TooltipManager : MonoBehaviour
         if (GM.i.atStart || GM.i.inSanctuary || !GM.i.isFocused) return;
         //
         if (GM.i.systemInput.GetButtonDown(0) || GM.i.systemInput.GetButtonDown(23)) EquipGroundItem(0);
-        if (GM.i.systemInput.GetButtonDown(19)) SpawnEssences();
+        if (GM.i.systemInput.GetButtonDown(19)) SpawnEssences(0);
         //
         if (GM.i.isMultiplayer)
         {
             if (GM.i.systemInput.GetButtonDown(0) || GM.i.systemInput.GetButtonDown(23)) EquipGroundItem(1);
-            if (GM.i.systemInput.GetButtonDown(19)) SpawnEssences();
+            if (GM.i.systemInput.GetButtonDown(19)) SpawnEssences(1);
         }
     }
     //
@@ -72,6 +72,7 @@ public class TooltipManager : MonoBehaviour
             if ((int)currentShownItem.weaponType <= 2) GM.i.pManager.equipment.EquipWeapon(currentShownItem);
             else
             {
+                //offhand weapons are treated as shields and so are equipped as armor
                 GM.i.pManager.equipment.EquipArmor(currentShownItem);
                 if (!everLootedOffhand) UnlockOffHandAchievement();
             }
@@ -99,12 +100,13 @@ public class TooltipManager : MonoBehaviour
     }
     //
     public void RecentlyExtractedGlyph() => StartCoroutine(ChangeExtractBools());
-    void SpawnEssences()
+    void SpawnEssences(int pIndex)
     {
-        if (!tooltipController[0].onScreen) return;
+        if (!tooltipController[pIndex].onScreen) return;
+        Item shownItem = pIndex == 0 ? currentShownItem : pTwocurrentShownItem;
         //
-        if (equipmentController[0].onScreen) equipmentController[0].HideTooltip();
-        GM.i.events.ExtractedEssence(currentShownItem.id);
+        if (equipmentController[pIndex].onScreen) equipmentController[pIndex].HideTooltip();
+        GM.i.events.ExtractedEssence(showItem.id);
         StartCoroutine(ChangeExtractBools());
         CheckIfOtherItemsToShowAreNearby();
     }
@@ -141,7 +143,7 @@ public class TooltipManager : MonoBehaviour
         if (pNumber == 0)
         {
             currentShownItem = null;
-            currentID = -9119;
+            currentID = -9119; // id set to an integer that will never be found naturally
         }
         else
         {
@@ -157,7 +159,7 @@ public class TooltipManager : MonoBehaviour
         HideTooltip(pNumber);
     }
     //
-    public void CheckIfSlotHasItem(ItemType iType, ArmorType aType, bool isPlayerTwo, float tooltipOffset = 0)
+    public void CheckIfInventorySlotHasItem(ItemType iType, ArmorType aType, bool isPlayerTwo, float tooltipOffset = 0)
     {
         var slot = isPlayerTwo ? GM.i.ui.pTwoInventory : GM.i.ui.playerInventory;
         if (iType == ItemType.Weapon)
