@@ -30,12 +30,13 @@ public abstract class OrbitalBase : MonoBehaviour
     //
     void LateUpdate()
     {
-      orbitAngle += speed * Time.deltaTime;
-      //
-      x = orbitRadius * Mathf.Cos(orbitAngle);
-      z = orbitRadius * Mathf.Sin(orbitAngle);
-      orbitPosition = new Vector3(x, 0.5f, z);
-      //
-      orb.position = orbitPosition + GM.i.pTransform.position;
+        orbitAngle += speed * Time.deltaTime;
+        //
+        x = orbitRadius * Mathf.Cos(orbitAngle);
+        z = orbitRadius * Mathf.Sin(orbitAngle);
+        orbitPosition = new Vector3(x, 0.5f, z);
+        //
+        // orbit around player
+        orb.position = orbitPosition + GM.i.pTransform.position;
     }
 }
