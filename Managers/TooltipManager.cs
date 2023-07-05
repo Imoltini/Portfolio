@@ -29,8 +29,6 @@ public class TooltipManager : MonoBehaviour
     //
     [HideInInspector] public bool recentlyExtracted;
     [HideInInspector] public bool recentlyPickedUpItem;
-    [HideInInspector] public int currentShownGeneralItem;
-    [HideInInspector] public bool generalTooltipOnScreen;
     //
     public TooltipController[] tooltipController;
     public EquipmentTooltipController[] equipmentController;
@@ -41,7 +39,6 @@ public class TooltipManager : MonoBehaviour
 
     //
 
-    void Awake() => generalTooltipObject.SetActive(false);
     void Start() => GM.i.events.OnPlayerDied += HideAllTooltips;
     void Update()
     {
