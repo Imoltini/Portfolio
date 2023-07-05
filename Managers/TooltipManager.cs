@@ -27,14 +27,6 @@ public class TooltipManager : MonoBehaviour
     public Color[] itemRarityTextColor;
     public Color[] tooltipBackgroundColourIndex;
     //
-    [Header("General Tooltip Variables")]
-    public Image generalItemIcon;
-    public GameObject glyphExtractPrompt;
-    public GameObject generalTooltipObject;
-    public TextMeshProUGUI generalItemName;
-    public TextMeshProUGUI generalItemType;
-    public TextMeshProUGUI generalItemDescription;
-    //
     [HideInInspector] public bool recentlyExtracted;
     [HideInInspector] public bool recentlyPickedUpItem;
     [HideInInspector] public int currentShownGeneralItem;
@@ -223,74 +215,10 @@ public class TooltipManager : MonoBehaviour
         else return defaultStatValueColor;
     }
     //
-    public void ShowGeneralTooltip(GeneralItemObject generalItem, int itemID)
-    {
-        if (!GM.i.ui.isMainCanvasOn) return;
-        //
-        currentShownGeneralItem = itemID;
-        glyphExtractPrompt.SetActive(false);
-        generalItemName.text = generalItem.itemName;
-        generalItemIcon.sprite = generalItem.itemIcon;
-        generalItemDescription.text = LocalizationManager.GetTranslation(generalItem.localizedTerm);
-        if (generalItem.itemType == ItemType.Artifact) generalItemType.text = LocalizationManager.GetTranslation("artifact");
-        else if (generalItem.itemType == ItemType.DominationRune) generalItemType.text = LocalizationManager.GetTranslation("artifact");
-        else if (generalItem.itemType == ItemType.Cosmetics)
-        {
-            if (generalItem.cosmeticsType == CosmeticsType.Head) generalItemType.text = LocalizationManager.GetTranslation("attachment");
-            else if (generalItem.cosmeticsType == CosmeticsType.Wings) generalItemType.text = LocalizationManager.GetTranslation("wings");
-            else if (generalItem.cosmeticsType == CosmeticsType.Outfit)
-            {
-                generalItemType.text = LocalizationManager.GetTranslation("outfit");
-                if (LocalizationManager.CurrentLanguageCode.Equals("en", StringComparison.Ordinal)) generalItemDescription.text = generalItem.itemDescription;
-            }
-            else if (generalItem.cosmeticsType == CosmeticsType.Sanctuary) generalItemType.text = LocalizationManager.GetTranslation("sanctuary");
-            else if (generalItem.cosmeticsType == CosmeticsType.Companion) generalItemType.text = LocalizationManager.GetTranslation("companion");
-        }
-        else
-        {
-            string val = generalItem.glyphAffix.actualValue.ToString();
-            string aff = LocalizationManager.GetTranslation(generalItem.glyphAffix.affixIndex);
-            string translation = generalItem.glyphAffix.isPercent ? LocalizationManager.GetTranslation("glyphPercent") : LocalizationManager.GetTranslation("glyphAffix");
-            string formattedTranslation = string.Format(translation, val, aff);
-            generalItemDescription.text = formattedTranslation;
-            //
-            glyphExtractPrompt.SetActive(true);
-            generalItemType.text = "ENCHANTING";
-        }
-        //
-        generalTooltipObject.SetActive(true);
-        generalTooltipOnScreen = true;
-        //
-        equipmentController[0].HideTooltip();
-        HideTooltip(0);
-    }
-    //
-    public void HideGeneralTooltip()
-    {
-        DisableGeneralTooltip();
-        //
-        if (listOfNearbyItems.Count > 0)
-        {
-            foreach (Item item in listOfNearbyItems.Values)
-            {
-                tooltipController[0].ShowTooltip(item);
-                break;
-            }
-        }
-    }
-    //
-    public void DisableGeneralTooltip()
-    {
-        currentShownGeneralItem = -1;
-        generalTooltipOnScreen = false;
-        generalTooltipObject.SetActive(false);
-    }
-    //
     public void HideAllTooltips()
     {
         HideTooltip(0);
         HideTooltip(1);
-        DisableGeneralTooltip();
         equipmentController[0].HideTooltip();
         equipmentController[1].HideTooltip();
     }
