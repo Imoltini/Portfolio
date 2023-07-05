@@ -5,6 +5,8 @@ public class CameraScript : MonoBehaviour
 {
 	public float heightFromPlayer;
 	public float distanceFromPlayer;
+ 	float multiplayerHeightOffset = 9f;
+  	float multiplayerDepthOffset = -7.f;
 	//
 	[HideInInspector] public bool rotating;
 	[HideInInspector] public bool interacting;
@@ -39,7 +41,7 @@ public class CameraScript : MonoBehaviour
 		{
 			if (GM.i.currentScene > 2 && GM.i.isMultiplayer)
 			{
-				camOffset = new Vector3(0, 9, -7.5f);
+				camOffset = new Vector3(0, multiplayerHeightOffset, multiplayerDepthOffset);
 				targets.Add(GM.i.pTwoTransform);
 				originalOffset = camOffset;
 			}
@@ -48,11 +50,10 @@ public class CameraScript : MonoBehaviour
 	//
 	void FixedUpdate()
 	{
-		if (rotating)
-		{
-			RotateCamera(rotationAngle);
-			if (camForm.rotation == rotationAngle.rotation) rotating = false;
-		}
+		if (!rotating) return;
+		//
+		RotateCamera(rotationAngle);
+		if (camForm.rotation == rotationAngle.rotation) rotating = false;
 	}
 	//
 	void LateUpdate()
