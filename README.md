@@ -7,7 +7,7 @@ It includes some of the classes that best showcase how Knight Crawlers works wit
 Link to Knight Crawlers : https://store.steampowered.com/app/1649130/Knight_Crawlers/
 
 Below you will find links to games I had worked on in varying capacities ranging from community management, game design, and sound design.
-With most games I was part of the team from ideation all the way to release and taking part in post-launch dev-ops.
+With most games I was part of the team from ideation all the way to release and taking part in post-launch maintenance and updates.
 
 **Gameloft**: _Games developed within in-house engine and Unreal 4_
 
