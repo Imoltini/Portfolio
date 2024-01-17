@@ -1,10 +1,11 @@
 # Code-Samples
 Hello there! 
 
-Here you'll find a collection of classes from my work on Knight Crawlers.
-It includes some of the classes that best showcase how Knight Crawlers works without giving away too much source code as the game is commercially available.
+Here you'll find a collection of classes from my work on Knight Crawlers and Battle Showdown.
+It includes some of the classes that best showcase my work without giving away too much source code as the games are commercially available.
 
 Link to Knight Crawlers : https://store.steampowered.com/app/1649130/Knight_Crawlers/
+Link to Battle Showdown : https://ethlas.com/battleshowdown/
 
 Below you will find links to games I had worked on in varying capacities ranging from community management, game design, and sound design.
 With most games I was part of the team from ideation all the way to release and taking part in post-launch maintenance and updates.
