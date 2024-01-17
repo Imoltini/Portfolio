@@ -5,6 +5,7 @@ Here you'll find a collection of classes from my work on Knight Crawlers and Bat
 It includes some of the classes that best showcase my work without giving away too much source code as the games are commercially available.
 
 Link to Knight Crawlers : https://store.steampowered.com/app/1649130/Knight_Crawlers/
+
 Link to Battle Showdown : https://ethlas.com/battleshowdown/
 
 Below you will find links to games I had worked on in varying capacities ranging from community management, game design, and sound design.
